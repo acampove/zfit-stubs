@@ -33,7 +33,7 @@ jobs:
     - name: Install pypa/build
       run: >-
         micromamba run -n myenv  python3 -m
-        pip install
+        pip install .[dev]
         poetry
         build
     #-----------
