@@ -30,23 +30,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-poetry-
     #-----------
-    - name: Install pypa/build
-      run: >-
-        micromamba run -n myenv  python3 -m
-        pip install .[dev]
-        poetry
-        build
-    #-----------
-    - name: Install project dependencies
+    - name: Install and test 
       run: |
-        micromamba run -n myenv poetry install
-    #-----------
-    - name: Test
-      run: |
+        micromamba run -n myenv pip install poetry
+        micromamba run -n myenv poetry install --extras 'dev'
+        micromamba run -n myenv poetry build
         micromamba run -n myenv pytest tests
-    #-----------
-    - name: Build a binary wheel and a source tarball
-      run:  micromamba run -n myenv python3 -m build
     #-----------
     - name: Store the distribution packages
       uses: actions/upload-artifact@v4
