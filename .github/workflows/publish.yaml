@@ -32,7 +32,7 @@ jobs:
     #-----------
     - name: Install and test 
       run: |
-        micromamba run -n myenv pip install poetry
+        micromamba run -n myenv pip install poetry pytest
         micromamba run -n myenv poetry install --extras 'dev'
         micromamba run -n myenv poetry build
         micromamba run -n myenv pytest tests
